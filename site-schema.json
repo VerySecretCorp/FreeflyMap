@@ -1,0 +1,61 @@
+{
+    "pgMapId": 122047,
+    "lat": 50.998362,
+    "lng": 14.700136,
+    "geohash": "u346nebqcz",
+    "windDirection": {
+        "E": true,
+        "NE": false,
+        "N": false,
+        "NW": false,
+        "W": true,
+        "SW": false,
+        "S": false,
+        "SE": false
+    },
+    "name": "Wiese in Oberruppersdorf",
+    "details": [
+        {
+            "label": "Suitable for",
+            "isAutoTranslatable": true,
+            "field": "SuitableFor",
+            "value": "Paragliding. 1-seater with limited LFS. Hang gliding. 1-seater with limited LFS"
+        },
+        {
+            "label": "Access",
+            "isAutoTranslatable": true,
+            "field": "Access",
+            "value": "By car, walk"
+        },
+        {
+            "label": "Altitude",
+            "isAutoTranslatable": false,
+            "field": "AltitudeMSL",
+            "value": "320m (max. height difference 0m for this site)"
+        },
+        {
+            "label": "Towing",
+            "isAutoTranslatable": false,
+            "field": "Towing",
+            "value": "Towing height 150m, 150m"
+        },
+        {
+            "label": "Certified",
+            "isAutoTranslatable": false,
+            "field": "Certified",
+            "value": "Yes. Leichtflieger-Oberlausitz e.V."
+        },
+        {
+            "label": "Information",
+            "isAutoTranslatable": true,
+            "field": "SiteInformation",
+            "value": "<a href=\"https://leichtflieger-oberlausitz.de/\">https://leichtflieger-oberlausitz.de/</a>"
+        },
+        {
+            "label": "Coordinates",
+            "isAutoTranslatable": false,
+            "field": "Coordinates",
+            "value": "50.998362, 14.700136"
+        }
+    ]
+}

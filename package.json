@@ -1,0 +1,21 @@
+{
+  "name": "geohash",
+  "version": "1.0.0",
+  "description": "",
+  "source": "site/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "parcel watch",
+    "build": "parcel build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@googlemaps/markerclusterer": "^2.5.3",
+    "ngeohash": "^0.6.3",
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
