@@ -5,8 +5,9 @@
   "source": "site/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "parcel watch",
-    "build": "parcel build"
+    "watch": "parcel watch site/index.html --public-url ./",
+    "build": "parcel build site/index.html --public-url ./",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "node-fetch": "^3.3.0"
   },
   "devDependencies": {
-    "parcel": "^2.12.0"
+    "parcel": "^2.12.0",
+    "push-dir": "^0.4.1"
   }
 }
