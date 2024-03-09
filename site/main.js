@@ -1,4 +1,7 @@
 import { initMap } from "../map";
+let { GMAPS_API_KEY } = process.env;
+
+window.GMAPS_API_KEY = GMAPS_API_KEY
 
 initMap({
     mapElement: document.getElementById("map"),
