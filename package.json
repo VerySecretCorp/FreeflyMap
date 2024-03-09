@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "parcel watch site/index.html --public-url ./",
     "build": "parcel build site/index.html --public-url ./",
-    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+    "deploy": "parcel build site/index.html --public-url ./ && push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "author": "",
   "license": "ISC",
