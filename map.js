@@ -1,5 +1,4 @@
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
-import pointsFromCenter from './neighbours'
 import debounce from './debounce'
 
 const getRadiusFromPoints = (neCoords, centerCoords) => {
@@ -24,6 +23,7 @@ const visiblePoints = (bounds) =>
     .slice(0, maxVisible)
 
 const updateAllPoints = async (bounds) => {
+  const pointsFromCenter = (await import('./neighbours')).default
   const center = { lat: bounds.getCenter().lat(), lng: bounds.getCenter().lng() }
   const neCords = { lat: bounds.getNorthEast().lat(), lng: bounds.getNorthEast().lng() }
 
@@ -76,6 +76,25 @@ const onBoundsChanged = (map, searchBox, infoWindow, Marker, MarkerClusterer) =>
   })
 }
 
+const setupListeners = async ({
+  map, searchBox, InfoWindow, Marker, MarkerClusterer, LatLngBounds
+}) => {
+  map.addListener('bounds_changed', debounce(onBoundsChanged(
+    map,
+    searchBox,
+    new InfoWindow(),
+    Marker,
+    MarkerClusterer
+  ), 500))
+
+  searchBox.addListener('places_changed', onPlacesChanged(
+    searchBox,
+    new Marker({ map }),
+    LatLngBounds,
+    map
+  ))
+}
+
 const initMap = ({ mapElement, searchBoxInputElement, initialPosition }) => async () => {
   const { Map, InfoWindow } = await google.maps.importLibrary("maps")
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
@@ -91,20 +110,14 @@ const initMap = ({ mapElement, searchBoxInputElement, initialPosition }) => asyn
   })
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBoxInputElement)
 
-  map.addListener('bounds_changed', debounce(onBoundsChanged(
+  setupListeners({
     map,
     searchBox,
-    new InfoWindow(),
-    AdvancedMarkerElement,
-    MarkerClusterer
-  ), 500))
-
-  searchBox.addListener('places_changed', onPlacesChanged(
-    searchBox,
-    new AdvancedMarkerElement({ map }),
-    LatLngBounds,
-    map
-  ))
+    InfoWindow,
+    Marker: AdvancedMarkerElement,
+    MarkerClusterer,
+    LatLngBounds
+  })
 }
 
 export { initMap }
