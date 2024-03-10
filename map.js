@@ -1,5 +1,8 @@
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import debounce from './debounce'
+import DownloadControl from './DownloadControl'
+import downloadCSV from './download'
+import pointsToCSV from './pointsToCSV'
 
 const getRadiusFromPoints = (neCoords, centerCoords) => {
   const earthRadius = 6378.8
@@ -96,6 +99,7 @@ const setupListeners = async ({
 }
 
 const initMap = ({ mapElement, searchBoxInputElement, initialPosition }) => async () => {
+  // const { DirectionsService, DirectionsRenderer } = await google.maps.importLibrary("routes")
   const { Map, InfoWindow } = await google.maps.importLibrary("maps")
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker")
   const { SearchBox } = await google.maps.importLibrary("places")
@@ -107,8 +111,17 @@ const initMap = ({ mapElement, searchBoxInputElement, initialPosition }) => asyn
     zoom: 13,
     center: initialPosition,
     mapId: "myPgMapId",
+    fullscreenControl: false
   })
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBoxInputElement)
+
+  const centerControlDiv = document.createElement("div")
+  const control = new DownloadControl(centerControlDiv, () => {
+    downloadCSV(pointsToCSV(Object.values(allPointsByGeohash)), "points.csv")
+  })
+  centerControlDiv.index = 1
+  centerControlDiv.style.paddingTop = "10px"
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv)
 
   setupListeners({
     map,
